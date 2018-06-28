@@ -25,7 +25,7 @@ const s = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    wrap: 'wrap'    
+    flexWrap: 'wrap'    
   },
   inputContainer: {
     marginLeft: 20,
