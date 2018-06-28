@@ -17,7 +17,10 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-    alignItems: "center",
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',  
   },
   form: {
     marginTop: 20,
@@ -34,7 +37,7 @@ const s = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    height: 40,
+    height: 40
   },
 });
 
@@ -165,7 +168,7 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-        <View ref="Form"
+        <View
           keyboardShouldPersistTaps="always"
           style={s.form}>
           <CCInput {...this._inputProps("number")}
