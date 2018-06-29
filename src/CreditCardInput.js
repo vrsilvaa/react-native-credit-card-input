@@ -17,18 +17,10 @@ import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',  
+    alignItems: "center",
   },
   form: {
     marginTop: 20,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexWrap: 'wrap'    
   },
   inputContainer: {
     marginLeft: 20,
@@ -37,7 +29,7 @@ const s = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    height: 40
+    height: 40,
   },
 });
 
@@ -111,13 +103,13 @@ export default class CreditCardInput extends Component {
   _focus = field => {
     if (!field) return;
 
-    //const scrollResponder = this.refs.Form.getScrollResponder();
+    const scrollResponder = this.refs.Form.getScrollResponder();
     const nodeHandle = ReactNative.findNodeHandle(this.refs[field]);
 
     NativeModules.UIManager.measureLayoutRelativeToParent(nodeHandle,
       e => { throw e; },
       x => {
-     //   scrollResponder.scrollTo({ x: Math.max(x - PREVIOUS_FIELD_OFFSET, 0), animated: true });
+        scrollResponder.scrollTo({ x: Math.max(x - PREVIOUS_FIELD_OFFSET, 0), animated: true });
         this.refs[field].focus();
       });
   }
@@ -168,8 +160,11 @@ export default class CreditCardInput extends Component {
           number={number}
           expiry={expiry}
           cvc={cvc} />
-        <View
+        <ScrollView ref="Form"
+          horizontal
           keyboardShouldPersistTaps="always"
+          scrollEnabled={allowScroll}
+          showsHorizontalScrollIndicator={false}
           style={s.form}>
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
@@ -188,7 +183,7 @@ export default class CreditCardInput extends Component {
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
-        </View>
+        </ScrollView>
       </View>
     );
   }
